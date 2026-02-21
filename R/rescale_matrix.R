@@ -20,3 +20,4 @@ rescale_matrix <- function(m){
   rownames(m_rescale) <- rownames(m)
   m_rescale
 }
+

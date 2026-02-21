@@ -2,30 +2,23 @@
 % Please edit documentation in R/temp_overlap.R
 \name{temp_overlap}
 \alias{temp_overlap}
-\title{Mean concurrent temporal niche overlap}
+\title{Assemblage-wide temporal niche segregation}
 \usage{
 temp_overlap(mat, method = c("pianka", "czekanowski"))
 }
 \arguments{
-\item{mat}{Numeric matrix (rows = biological identities, columns = ordered time intervals).}
+\item{mat}{A matrix with species per time columns.}
 
-\item{method}{Overlap index to use: \code{"pianka"} or \code{"czekanowski"}.}
+\item{method}{A measure of temporal niche overlap between pairs of species}
 }
 \value{
-A single numeric value (named by the method) equal to the mean of
-the lower triangle of the pairwise overlap matrix.
+The mean temporal overlaping index from a pairwise distance matrix
 }
 \description{
-Computes the \strong{mean} of all pairwise overlaps among rows (biological
-identities) using the chosen index.
-}
-\details{
-For \code{"czekanowski"}, rows are automatically rescaled to proportions.
+Assemblage-wide temporal niche segregation
 }
 \examples{
 temp_overlap(ex1, method = "pianka")
-temp_overlap(rescale_matrix(ex1), method = "czekanowski")
-}
-\seealso{
-\code{\link[=temp_overlap_matrix]{temp_overlap_matrix()}}, \code{\link[=get_null_model]{get_null_model()}}
+ex1_rescale <- rescale_matrix(ex1)
+temp_overlap(ex1_rescale, method = "czekanowski")
 }

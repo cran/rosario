@@ -48,7 +48,7 @@ temp_overlap_matrix <- function(mat, method = c("pianka", "czekanowski")) {
     }
 
 
-  }
+      }
 
   if(method == "czekanowski"){
     for (i in 1:(nrow(mat) - 1)) {

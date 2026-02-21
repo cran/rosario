@@ -17,3 +17,5 @@ vec_permutation <- function(numvec, x = 1){
   module_sequence <- c(which(module_logic), which(!module_logic))
   numvec[ module_sequence ]
 }
+
+

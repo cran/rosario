@@ -5,6 +5,10 @@
 #' recomputing the mean pairwise overlap (see [temp_overlap()]).
 #'
 #' @param mat Numeric matrix (rows = biological identities, columns = ordered time intervals).
+#'  Time intervals are assumed to be circular (e.g., hours of the day, months of the year),
+#'  so the last interval is treated as adjacent to the first. Biological identities can be
+#'  individuals, populations, species or communities.
+#'
 #' @param method Character string naming the overlap index to use:
 #'   `"pianka"` or `"czekanowski"`.
 #' @param nsim Integer number of randomizations to run (default `100`).
@@ -38,15 +42,15 @@
 #' @importFrom future plan multisession
 #'
 #' @export
-get_null_model <- function(mat, method, nsim = 1000, parallel = FALSE) {
+get_null_model <- function(mat, method, nsim = 100, parallel = FALSE) {
 
   if(method == "czekanowski"){
     mat <- rosario::rescale_matrix(mat)
   }
 
-  niche_overlap_observed <- temp_overlap(mat, method)
+ niche_overlap_observed <- temp_overlap(mat, method)
 
-  f <- function() rosario::temp_overlap(rosario::rosario_sample(mat), method)
+ f <- function() rosario::temp_overlap(rosario::rosario_sample(mat), method)
 
   if(parallel){
     future::plan(strategy = "multisession")
@@ -60,3 +64,4 @@ get_null_model <- function(mat, method, nsim = 1000, parallel = FALSE) {
   names(results) <- c("observed_niche_overlap", "p_value", "null_niche_overlap")
   return(results)
 }
+

@@ -4,10 +4,13 @@
 \alias{get_null_model}
 \title{Null-model test via ROSARIO algorithm randomization}
 \usage{
-get_null_model(mat, method, nsim = 1000, parallel = FALSE)
+get_null_model(mat, method, nsim = 100, parallel = FALSE)
 }
 \arguments{
-\item{mat}{Numeric matrix (rows = biological identities, columns = ordered time intervals).}
+\item{mat}{Numeric matrix (rows = biological identities, columns = ordered time intervals).
+Time intervals are assumed to be circular (e.g., hours of the day, months of the year),
+so the last interval is treated as adjacent to the first. Biological identities can be
+individuals, populations, species or communities.}
 
 \item{method}{Character string naming the overlap index to use:
 \code{"pianka"} or \code{"czekanowski"}.}
